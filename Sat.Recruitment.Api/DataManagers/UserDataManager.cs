@@ -37,7 +37,7 @@ namespace Sat.Recruitment.Api.DataManagers
             if (users.Any(u => u.Name.ToUpper().Contains(newUser.Name.ToUpper())
                 || u.Email.ToUpper().Contains(newUser.Email.ToUpper())
                 || u.Address.ToUpper().Contains(newUser.Address.ToUpper())
-                || u.Phone.Contains(newUser.Phone)))
+                || u.Phone.ToUpper().Contains(newUser.Phone.ToUpper())))
             {
                 throw new Exception(ErrorMessagesHelper.DuplicatedUserMessage());
             }            

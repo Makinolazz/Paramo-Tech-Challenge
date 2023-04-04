@@ -12,9 +12,10 @@ namespace Sat.Recruitment.Api.Helpers
     {
         private readonly List<User> _users = new List<User>();
         private readonly string _filePath = "./Files/Users.json";
+
         private StreamReader ReadUsersFromFile()
         {
-            var path = Directory.GetCurrentDirectory() + "/Files/Users.txt";
+            var path = Directory.GetCurrentDirectory() + _filePath;
 
             FileStream fileStream = new FileStream(path, FileMode.Open);
 
