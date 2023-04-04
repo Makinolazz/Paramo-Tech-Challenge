@@ -36,10 +36,5 @@
         {
             return "The user type is invalid";
         }
-
-        public static string NegativeMoneyMessage()
-        {
-            return "The money value can not be negative";
-        }
     }
 }
