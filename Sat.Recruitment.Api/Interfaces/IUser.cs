@@ -7,5 +7,6 @@
         string Address { get; set; }
         string Phone { get; set; }
         string UserType { get; set; }
+        decimal Money { get; set; }
     }
 }

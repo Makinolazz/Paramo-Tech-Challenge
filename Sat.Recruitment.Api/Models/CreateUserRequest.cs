@@ -1,6 +1,7 @@
 ﻿using Sat.Recruitment.Api.Helpers;
 using Sat.Recruitment.Api.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Xml.Linq;
@@ -12,21 +13,23 @@ namespace Sat.Recruitment.Api.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Address { get ; set; }
+        [Phone]
         public string Phone { get; set; }
         public string UserType { get; set; }
-        public string Money { get; set; }
+        [Range(0.0, Double.MaxValue)]
+        public decimal Money { get; set; }
 
         public bool IsRequestValid()
         {
-            if (Name == null)
+            if (string.IsNullOrEmpty(Name))
             {
                 throw new Exception(ErrorMessagesHelper.NullNameMessage());
             }
-            if (Email == null)
+            if (string.IsNullOrEmpty(Email))
             {
                 throw new Exception(ErrorMessagesHelper.NullEmailMessage());
             }
-            if (Address == null)
+            if (string.IsNullOrEmpty(Address))
             {
                 throw new Exception(ErrorMessagesHelper.NullAddressMessage());
             }

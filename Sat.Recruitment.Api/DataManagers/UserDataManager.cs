@@ -22,7 +22,7 @@ namespace Sat.Recruitment.Api.DataManagers
             _result = result;
         }
 
-        public async Task CreateNewUser(CreateUserRequest request)
+        public async Task CreateNewUser(IUser request)
         {
             var newUser = new User
             {
@@ -31,7 +31,7 @@ namespace Sat.Recruitment.Api.DataManagers
                 Address = request.Address,
                 Phone = request.Phone,
                 UserType = request.UserType,
-                Money = CalculateMoney(request.UserType, decimal.Parse(request.Money))
+                Money = CalculateMoney(request.UserType, request.Money)
             };
 
             await ValidateDuplicatedUser(newUser);
@@ -40,9 +40,9 @@ namespace Sat.Recruitment.Api.DataManagers
         private async Task ValidateDuplicatedUser(User newUser)
         {
             var users = await new UsersFileReader().GetFileUsers();
-            if (users.Any(u => u.Name.Contains(newUser.Name)
-                || u.Email.Contains(newUser.Email)
-                || u.Address.Contains(newUser.Address)
+            if (users.Any(u => u.Name.ToUpper().Contains(newUser.Name.ToUpper())
+                || u.Email.ToUpper().Contains(newUser.Email.ToUpper())
+                || u.Address.ToUpper().Contains(newUser.Address.ToUpper())
                 || u.Phone.Contains(newUser.Phone)))
             {
                 throw new Exception(ErrorMessagesHelper.DuplicatedUserMessage());
@@ -51,13 +51,13 @@ namespace Sat.Recruitment.Api.DataManagers
 
         private decimal CalculateMoney(string userType, decimal money)
         {
-            switch (userType) 
+            switch (userType.ToUpper()) 
             {
-                case "Normal":
+                case UserTypeConstants.NORMAL_USER:
                     return CalculateMoneyHelper.CalculateNormalUserMoney(money);
-                case "SuperUser":
+                case UserTypeConstants.SUPER_USER:
                     return CalculateMoneyHelper.CalculateSuperUserMoney(money);
-                case "Premium":
+                case UserTypeConstants.PREMIUM_USER:
                     return CalculateMoneyHelper.CalculatePremiumUserMoney(money);
                 default:
                     return money;

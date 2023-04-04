@@ -22,7 +22,7 @@ namespace Sat.Recruitment.Test
                 Address = "Av. Juan G",
                 Phone = "+349 1122354215",
                 UserType = "Normal",
-                Money = "124"
+                Money = 124
             };
             var result = await userController.CreateUser(user);
 
@@ -41,7 +41,7 @@ namespace Sat.Recruitment.Test
                 Address = "Av. Juan G",
                 Phone = "+349 1122354215",
                 UserType = "Normal",
-                Money = "124"
+                Money = 124
             };
             var result = await userController.CreateUser(user);
 

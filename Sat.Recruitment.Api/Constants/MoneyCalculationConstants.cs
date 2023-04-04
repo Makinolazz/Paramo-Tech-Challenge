@@ -1,6 +1,6 @@
 ﻿namespace Sat.Recruitment.Api.Constants
 {
-    public class MoneyCalculationConstants
+    public static class MoneyCalculationConstants
     {
         public const decimal ONE_HUNDRED_USD_LIMIT = 100;
         public const decimal TEN_USD_LIMIT = 10;
