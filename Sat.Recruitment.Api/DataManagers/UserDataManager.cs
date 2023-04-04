@@ -54,7 +54,7 @@ namespace Sat.Recruitment.Api.DataManagers
                 case UserTypeConstants.PREMIUM_USER:
                     return CalculateMoneyHelper.CalculatePremiumUserMoney(money);
                 default:
-                    return money;
+                    throw new Exception(ErrorMessagesHelper.InvalidUserTypeMessage());
             }
         }
     }
