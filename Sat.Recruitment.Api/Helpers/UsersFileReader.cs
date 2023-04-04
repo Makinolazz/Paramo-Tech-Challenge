@@ -1,7 +1,9 @@
 ﻿using Sat.Recruitment.Api.Interfaces;
 using Sat.Recruitment.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Sat.Recruitment.Api.Helpers
@@ -9,6 +11,7 @@ namespace Sat.Recruitment.Api.Helpers
     public class UsersFileReader
     {
         private readonly List<User> _users = new List<User>();
+        private readonly string _filePath = "./Files/Users.json";
         private StreamReader ReadUsersFromFile()
         {
             var path = Directory.GetCurrentDirectory() + "/Files/Users.txt";
@@ -38,6 +41,13 @@ namespace Sat.Recruitment.Api.Helpers
             }
             reader.Close();
             return _users;
+        }
+
+        public async Task<List<User>> GetJsonFileUsers()
+        {
+            string file = await File.ReadAllTextAsync(_filePath);
+            var jsonFile = JsonSerializer.Deserialize<JsonFileUsers>(file);
+            return jsonFile.Users;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Sat.Recruitment.Api.Models
             {
                 throw new Exception(ErrorMessagesHelper.NullAddressMessage());
             }
-            if (Phone == null)
+            if (string.IsNullOrEmpty(Phone))
             {                
                 throw new Exception(ErrorMessagesHelper.NullPhoneMessage());
             }

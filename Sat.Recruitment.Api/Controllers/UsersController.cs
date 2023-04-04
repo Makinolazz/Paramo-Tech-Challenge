@@ -26,7 +26,7 @@ namespace Sat.Recruitment.Api.Controllers
             {                
                 if (request.IsRequestValid())
                 {
-                    var userDataManager = new UserDataManager(result);
+                    var userDataManager = new UserDataManager();
                     await userDataManager.CreateNewUser(request);
                     result.IsSuccess = true;
                     result.Errors = SuccessMessagesHelper.UserCreatedMessage();

@@ -16,12 +16,6 @@ namespace Sat.Recruitment.Api.DataManagers
 {
     public class UserDataManager
     {
-        private Result _result;
-        public UserDataManager(Result result)
-        {
-            _result = result;
-        }
-
         public async Task CreateNewUser(IUser request)
         {
             var newUser = new User
@@ -39,7 +33,7 @@ namespace Sat.Recruitment.Api.DataManagers
 
         private async Task ValidateDuplicatedUser(User newUser)
         {
-            var users = await new UsersFileReader().GetFileUsers();
+            var users = await new UsersFileReader().GetJsonFileUsers();
             if (users.Any(u => u.Name.ToUpper().Contains(newUser.Name.ToUpper())
                 || u.Email.ToUpper().Contains(newUser.Email.ToUpper())
                 || u.Address.ToUpper().Contains(newUser.Address.ToUpper())
